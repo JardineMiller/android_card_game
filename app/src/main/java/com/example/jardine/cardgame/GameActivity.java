@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
-    public int numberOfPlayers;
-    public int numberOfCards;
+    public String numberOfPlayers;
+    public String numberOfCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +16,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         TextView numPlayers = findViewById(R.id.num_of_players);
         TextView numCards = findViewById(R.id.num_of_cards);
-        numberOfPlayers = Integer.parseInt(numPlayers.getText().toString());
-        numberOfCards = Integer.parseInt(numCards.getText().toString());
+        numberOfPlayers = numPlayers.getText().toString();
+        numberOfCards = numCards.getText().toString();
     }
 
     public void onPlayButtonClick(View view) {
