@@ -8,7 +8,7 @@ public enum CardSuit {
     HEARTS("Hearts"),
     SPADES("Spades"),
     CLUBS("Clubs"),
-    DIAMONS("Diamonds");
+    DIAMONDS("Diamonds");
 
     private final String suit;
 
