@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">CardGame</string>
+    <string name="app_name">Winning Deck</string>
+    <string name="welcome_message">Welcome to Winning Deck! Press the \'Play\' button to begin!</string>
+    <string name="play_button">Play</string>
+    <string name="player_select_text">Please select a number of players</string>
+    <string name="card_select_text">Please select a number of cards per player (max 5)</string>
 </resources>
