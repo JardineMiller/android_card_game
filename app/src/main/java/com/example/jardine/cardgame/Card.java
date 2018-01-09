@@ -7,12 +7,20 @@ package com.example.jardine.cardgame;
 public class Card {
     private CardSuit suit;
     private CardValue value;
-    private String imageURL;
+    private String image;
 
     public Card(CardSuit suit, CardValue value) {
         this.suit = suit;
         this.value = value;
-        this.imageURL = null;
+        this.image = null;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getSuitString() {

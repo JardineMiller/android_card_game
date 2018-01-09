@@ -42,4 +42,5 @@ public class CardTest {
     public void cardHasValueType() {
         assertEquals(CardValue.ACE, card.getValueType());
     }
+
 }

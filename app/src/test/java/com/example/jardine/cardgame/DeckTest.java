@@ -41,4 +41,10 @@ public class DeckTest {
         Card firstCard = new Card(CardSuit.values()[0], CardValue.values()[0]);
         assertEquals(firstCard.prettyName(), deck.removeCard().prettyName());
     }
+
+    @Test
+    public void cardsHaveImages() {
+        deck.populateDeck();
+        assertEquals("@drawable/king_of_spades", deck.getCards().get(50).getImage());
+    }
 }

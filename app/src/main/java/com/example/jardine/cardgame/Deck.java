@@ -14,6 +14,10 @@ public class Deck {
         this.cards = new ArrayList<>();
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
     public int cardCount() {
         return this.cards.size();
     }
@@ -31,6 +35,15 @@ public class Deck {
             for(CardValue value : CardValue.values()) {
                 cards.add(new Card(suit, value));
             }
+        }
+        setImages();
+    }
+
+    public void setImages() {
+        int i = 0;
+        for(Card card : cards) {
+            card.setImage(ImageURL.values()[i].getImage());
+            i++;
         }
     }
 }
