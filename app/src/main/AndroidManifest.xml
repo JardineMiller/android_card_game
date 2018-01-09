@@ -21,11 +21,6 @@
             android:label="Winning Deck"
             android:parentActivityName=".WelcomeActivity">
         </activity>
-        <activity
-            android:name=".ResultActivity"
-            android:label="Result"
-            android:parentActivityName=".GameActivity">
-        </activity>
     </application>
 
 </manifest>

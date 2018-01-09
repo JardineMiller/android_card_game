@@ -1,23 +1,28 @@
 package com.example.jardine.cardgame;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.Serializable;
 
 /**
  * Created by jardine on 08/01/2018.
  */
 
-public class Game {
-    private ArrayList<Player> players;
-    private HashMap<Player, Integer> results;
+public class Game implements Serializable {
+    private Player player;
+    private Player computer;
     private Deck deck;
-    private ArrayList<Player> winners;
 
-    public Game(ArrayList<Player> players) {
+    public Game(String playerName) {
         this.deck = new Deck();
-        this.players = players;
-        this.results = new HashMap<>();
-        this.winners = new ArrayList<>();
+        this.player = new Player(playerName);
+        this.computer = new Player("Android");
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Player getComputer() {
+        return computer;
     }
 
     public void prepareDeck() {
@@ -25,44 +30,27 @@ public class Game {
         this.deck.shuffleDeck();
     }
 
-    public void dealCard(int numberOfCards) {
-        for(Player player : players) {
-            for (int i = 0; i < numberOfCards; i++) {
-                Card card = deck.removeCard();
-                player.addCard(card);
-            }
-        }
+    public void dealCards() {
+        Card card1 = deck.removeCard();
+        player.addCard(card1);
+        Card card2 = deck.removeCard();
+        computer.addCard(card2);
     }
 
-    public void determineWinner() {
-        for(Player player : players) {
-            if(winners.size() == 0) {
-                winners.add(player);
-            } else if (winners.get(0).handValue() < player.handValue()) {
-                winners.clear();
-                winners.add(player);
-            } else if (winners.get(0).handValue() == player.handValue()) {
-                winners.add(player);
-            }
-        }
+    public void startGame() {
+        prepareDeck();
+        dealCards();
+        dealCards();
     }
 
-    public String getPlayers() {
-        String playersString = "";
-        for(Player player : players) {
-            playersString += "\nPlayer: " + player.getName() + " \nPoints: " + player.handValue() + "\nCards: " + player.getAllCards();
+    public String determineWinner() {
+        if (player.handValue() == computer.handValue()) {
+            return "It's a draw!";
         }
-        return playersString;
-    }
-
-    public String getWinners() {
-        String winnersString = "";
-        if (winners.size() == 1) {
-            Player winner = winners.get(0);
-            winnersString = "\nResult: " + winner.getName() + " wins with " + winner.handValue() + " points.";
+        if(player.handValue() > computer.handValue()) {
+            return "You win!";
         } else {
-            winnersString = "\nResult: It's a draw";
+            return computer.getName() + " wins. Better luck next time.";
         }
-        return winnersString;
     }
 }

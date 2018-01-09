@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Winning Deck</string>
-    <string name="welcome_message">Welcome to Winning Deck! Press the \'Play\' button to begin!</string>
+    <string name="welcome_message">Welcome to Winning Deck! Type in your name below and press the \'Play\' button to begin!</string>
     <string name="play_button">Play</string>
-    <string name="player_select_text">Please select a number of players</string>
-    <string name="card_select_text">Please select a number of cards per player (max 5)</string>
+    <string name="play_again_button">Play again</string>
+    <string name='name_string'>Name</string>
+    <string name="hit_button">Hit</string>
+    <string name="compare_button">Compare</string>
+    <string name="computer_score_hidden">?</string>
 </resources>

@@ -14,10 +14,11 @@ public enum CardValue {
     EIGHT("Eight", 8),
     NINE("Nine", 9),
     TEN("Ten", 10),
+    ACE("Ace", 11),
     JACK("Jack", 10),
-    QUEEN("Queen", 10),
     KING("King", 10),
-    ACE("Ace", 11);
+    QUEEN("Queen", 10);
+
 
     private final String valueString;
     private final int value;

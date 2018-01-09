@@ -5,10 +5,11 @@ package com.example.jardine.cardgame;
  */
 
 public enum CardSuit {
-    HEARTS("Hearts"),
-    SPADES("Spades"),
     CLUBS("Clubs"),
-    DIAMONDS("Diamonds");
+    DIAMONDS("Diamonds"),
+    HEARTS("Hearts"),
+    SPADES("Spades");
+
 
     private final String suit;
 
