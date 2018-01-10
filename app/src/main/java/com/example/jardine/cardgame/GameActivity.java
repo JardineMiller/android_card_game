@@ -5,17 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
 
     TextView playerName;
     TextView playerScore;
-    TextView playerCards;
     TextView computerName;
     TextView computerScore;
-    TextView computerCards;
     TextView resultText;
+
+    ImageView playerCardOne;
+    ImageView playerCardTwo;
 
     Button hitButton;
     Button compareButton;
@@ -24,7 +26,6 @@ public class GameActivity extends AppCompatActivity {
     Game game;
 
     public void getInfo() {
-        playerCards.setText(game.getPlayer().getAllCards());
         playerScore.setText(Integer.toString(game.getPlayer().handValue()));
     }
 
@@ -46,11 +47,9 @@ public class GameActivity extends AppCompatActivity {
 
         playerName = findViewById(R.id.player_name);
         playerScore = findViewById(R.id.player_score);
-        playerCards = findViewById(R.id.player_cards);
 
         computerName = findViewById(R.id.computer_name);
         computerScore = findViewById(R.id.computer_score);
-        computerCards = findViewById(R.id.computer_cards);
 
         playerName.setText(game.getPlayer().getName());
         computerName.setText(game.getComputer().getName());
@@ -71,9 +70,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void compare(View button) {
-        computerCards.setText(game.getComputer().getAllCards());
         computerScore.setText(Integer.toString(game.getComputer().handValue()));
-        
+
         hitButton.setVisibility(View.GONE);
         compareButton.setVisibility(View.GONE);
         String resultMessage = game.determineWinner();

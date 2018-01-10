@@ -19,6 +19,9 @@ public class WelcomeActivity extends AppCompatActivity {
     public void onGoButtonClick(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         String name = nameEditText.getText().toString();
+        if (name.equals("")) {
+            name = "Player";
+        }
         intent.putExtra("name", name);
         startActivity(intent);
     }
