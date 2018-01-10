@@ -46,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
         playerCards = new ArrayList<>();
         computerCards = new ArrayList<>();
 
@@ -72,8 +73,9 @@ public class GameActivity extends AppCompatActivity {
         computerCards.add(computerCard5);
 
         resultText = findViewById(R.id.result_text);
-        resultText.setVisibility(View.GONE);
         playAgainButton = findViewById(R.id.play_again_button);
+
+        resultText.setVisibility(View.GONE);
         playAgainButton.setVisibility(View.GONE);
 
         String name = getIntent().getStringExtra("name");
@@ -93,16 +95,16 @@ public class GameActivity extends AppCompatActivity {
 
         game.startGame();
         getInfo();
-
         displayHand(game.getPlayer());
-
-
     }
 
     public void hit(View button) {
         if (game.getPlayer().handCount() < 5) {
             game.dealCards();
             displayHand(game.getPlayer());
+            for(int i = 0; i < game.getPlayer().handCount(); i++) {
+                computerCards.get(i).setImageResource(R.drawable.back);
+            }
             getInfo();
         }
         if (game.getPlayer().handCount() == 5) {
@@ -116,10 +118,12 @@ public class GameActivity extends AppCompatActivity {
 
         hitButton.setVisibility(View.GONE);
         compareButton.setVisibility(View.GONE);
-        String resultMessage = game.determineWinner();
-        resultText.setText(resultMessage);
+
         resultText.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
+
+        String resultMessage = game.determineWinner();
+        resultText.setText(resultMessage);
     }
 
     public void playAgain(View button) {

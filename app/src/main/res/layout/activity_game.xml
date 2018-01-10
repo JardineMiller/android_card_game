@@ -158,27 +158,27 @@
             android:scaleType="centerInside"
             android:src="@drawable/back"
             android:layout_margin="5dp"/>
+
         <ImageView
             android:id="@+id/player_card_3"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
+
         <ImageView
             android:id="@+id/player_card_4"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
+
         <ImageView
             android:id="@+id/player_card_5"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
     <LinearLayout
@@ -218,25 +218,22 @@
             android:id="@+id/computer_card_3"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/computer_card_4"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/computer_card_5"
             android:layout_width="60dp"
             android:layout_height="85dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:scaleType="centerInside" />
 
 
 
