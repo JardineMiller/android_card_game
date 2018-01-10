@@ -11,18 +11,15 @@
         android:id="@+id/player_score"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:paddingTop="5dp"
-        android:text="@string/player_start_score"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/player_cards"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -31,9 +28,7 @@
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:paddingTop="5dp"
-        android:text="@string/computer_score_hidden"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
@@ -75,7 +70,7 @@
 
     <TextView
         android:id="@+id/player_name"
-        android:layout_width="146dp"
+        android:layout_width="158dp"
         android:layout_height="25dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -87,7 +82,7 @@
 
     <TextView
         android:id="@+id/computer_name"
-        android:layout_width="143dp"
+        android:layout_width="158dp"
         android:layout_height="25dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
@@ -101,17 +96,18 @@
     <TextView
         android:id="@+id/result_text"
         android:layout_width="0dp"
-        android:layout_height="103dp"
+        android:layout_height="105dp"
         android:layout_gravity="center|end"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:gravity="center|end"
         android:paddingTop="32.5sp"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/computer_score" />
 
@@ -119,23 +115,21 @@
         android:id="@+id/play_again_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:onClick="playAgain"
         android:text="@string/play_again_button"
         app:layout_constraintBottom_toTopOf="@+id/player_score"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/result_text" />
 
     <LinearLayout
         android:id="@+id/player_cards"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="112dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -143,46 +137,49 @@
         android:weightSum="6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/player_card_1"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginLeft="26dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginRight="5dp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
         <ImageView
             android:id="@+id/player_card_2"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
         <ImageView
             android:id="@+id/player_card_3"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/player_card_4"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/player_card_5"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:layout_margin="5dp"
             android:scaleType="centerInside" />
     </LinearLayout>
@@ -190,7 +187,7 @@
     <LinearLayout
         android:id="@+id/computer_cards"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="112dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -203,42 +200,44 @@
 
         <ImageView
             android:id="@+id/computer_card_1"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginLeft="26dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginRight="5dp"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
         <ImageView
             android:id="@+id/computer_card_2"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/back" />
 
         <ImageView
             android:id="@+id/computer_card_3"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/computer_card_4"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
-            android:layout_margin="5dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside" />
 
         <ImageView
             android:id="@+id/computer_card_5"
-            android:layout_width="60dp"
-            android:layout_height="85dp"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
             android:layout_margin="5dp"
             android:scaleType="centerInside" />
 

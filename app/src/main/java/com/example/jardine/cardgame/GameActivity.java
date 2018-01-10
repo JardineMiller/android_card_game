@@ -38,10 +38,6 @@ public class GameActivity extends AppCompatActivity {
 
     Game game;
 
-    public void getInfo() {
-        playerScore.setText(Integer.toString(game.getPlayer().handValue()));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +71,6 @@ public class GameActivity extends AppCompatActivity {
         resultText = findViewById(R.id.result_text);
         playAgainButton = findViewById(R.id.play_again_button);
 
-        resultText.setVisibility(View.GONE);
-        playAgainButton.setVisibility(View.GONE);
-
-        String name = getIntent().getStringExtra("name");
-        game = new Game(name);
-
         hitButton = findViewById(R.id.hit_button);
         compareButton =  findViewById(R.id.compare_button);
 
@@ -90,12 +80,28 @@ public class GameActivity extends AppCompatActivity {
         computerName = findViewById(R.id.computer_name);
         computerScore = findViewById(R.id.computer_score);
 
+        resultText.setVisibility(View.GONE);
+        playAgainButton.setVisibility(View.GONE);
+
+        String name = getIntent().getStringExtra("name");
+
+        game = new Game(name);
+
         playerName.setText(game.getPlayer().getName());
         computerName.setText(game.getComputer().getName());
 
         game.startGame();
-        getInfo();
+        getInfo(game.getPlayer());
         displayHand(game.getPlayer());
+    }
+
+    public void getInfo(Player player) {
+        if(player.getName().equals("Android")) {
+            computerScore.setText(Integer.toString(game.getComputer().handValue()));
+        } else {
+            playerScore.setText(Integer.toString(game.getPlayer().handValue()));
+        }
+
     }
 
     public void hit(View button) {
@@ -107,7 +113,7 @@ public class GameActivity extends AppCompatActivity {
             for(int i = 0; i < game.getPlayer().handCount(); i++) {
                 computerCards.get(i).setImageResource(R.drawable.back);
             }
-            getInfo();
+            getInfo(game.getPlayer());
         }
         if (game.getPlayer().handCount() == maxCards) {
             compare(compareButton);
@@ -115,7 +121,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void compare(View button) {
-        computerScore.setText(Integer.toString(game.getComputer().handValue()));
+        getInfo(game.getComputer());
         displayHand(game.getComputer());
 
         hitButton.setVisibility(View.GONE);
@@ -123,6 +129,7 @@ public class GameActivity extends AppCompatActivity {
 
         resultText.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
+        computerScore.setVisibility(View.VISIBLE);
 
         String resultMessage = game.determineWinner();
         resultText.setText(resultMessage);

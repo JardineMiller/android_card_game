@@ -6,6 +6,4 @@
     <string name='name_string'>Name</string>
     <string name="hit_button">Hit</string>
     <string name="compare_button">Compare</string>
-    <string name="computer_score_hidden">?</string>
-    <string name="player_start_score">0</string>
 </resources>
