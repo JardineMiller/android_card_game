@@ -99,7 +99,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void hit(View button) {
-        if (game.getPlayer().handCount() < 5) {
+        int maxCards = 5;
+
+        if (game.getPlayer().handCount() < maxCards) {
             game.dealCards();
             displayHand(game.getPlayer());
             for(int i = 0; i < game.getPlayer().handCount(); i++) {
@@ -107,7 +109,7 @@ public class GameActivity extends AppCompatActivity {
             }
             getInfo();
         }
-        if (game.getPlayer().handCount() == 5) {
+        if (game.getPlayer().handCount() == maxCards) {
             compare(compareButton);
         }
     }

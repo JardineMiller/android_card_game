@@ -189,10 +189,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
+        android:rotation="180"
+        android:weightSum="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:weightSum="6">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/computer_card_1"
@@ -210,9 +211,9 @@
             android:id="@+id/computer_card_2"
             android:layout_width="60dp"
             android:layout_height="85dp"
+            android:layout_margin="5dp"
             android:scaleType="centerInside"
-            android:src="@drawable/back"
-            android:layout_margin="5dp"/>
+            android:src="@drawable/back" />
 
         <ImageView
             android:id="@+id/computer_card_3"
@@ -234,7 +235,6 @@
             android:layout_height="85dp"
             android:layout_margin="5dp"
             android:scaleType="centerInside" />
-
 
 
     </LinearLayout>
