@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
     ImageView computerCard5;
     ArrayList<ImageView> computerCards;
 
-    Button hitButton;
+    ImageButton hitButton;
     Button compareButton;
     Button playAgainButton;
 
@@ -110,7 +111,7 @@ public class GameActivity extends AppCompatActivity {
         if (game.getPlayer().handCount() < maxCards) {
             game.dealCards();
             displayHand(game.getPlayer());
-            for(int i = 0; i < game.getPlayer().handCount(); i++) {
+            for(int i = (game.getPlayer().handCount() - 1); i < game.getPlayer().handCount(); i++) {
                 computerCards.get(i).setImageResource(R.drawable.back);
             }
             getInfo(game.getPlayer());
