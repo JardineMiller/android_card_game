@@ -9,28 +9,28 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private ArrayList<Card> hand;
-    private int wallet;
+    private Wallet wallet;
 
-    public Player(String name) {
+    public Player(String name, int amount) {
         this.name = name;
         this.hand = new ArrayList<>();
-        this.wallet = 50;
+        this.wallet = new Wallet(amount);
     }
 
     public String getName() {
         return name;
     }
 
-    public int getWallet() {
+    public Wallet getWallet() {
         return wallet;
     }
 
-    public void increaseWallet(int amount) {
-        this.wallet += amount;
+    public void receive(int amount) {
+        this.wallet.increaseAmount(amount);
     }
 
-    public void decreaseWallet(int amount) {
-        this.wallet -= amount;
+    public void bet(int amount) {
+        this.wallet.decreaseAmount(amount);
     }
 
     public ArrayList<Card> getHand() {

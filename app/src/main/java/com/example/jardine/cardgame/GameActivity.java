@@ -16,9 +16,13 @@ public class GameActivity extends AppCompatActivity {
     TextView playerName;
     TextView playerScore;
     TextView playerWallet;
+    String playerWalletAmount;
+    String potValueAmount;
+
     TextView computerName;
     TextView computerScore;
     TextView resultText;
+    TextView potValue;
 
     ImageView playerCard1;
     ImageView playerCard2;
@@ -48,6 +52,9 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        int oldPlayerWallet = getIntent().getIntExtra("player_wallet", 50);
+        int oldAndroidWallet = getIntent().getIntExtra("android_wallet", 50);
+
         playerCards = new ArrayList<>();
         computerCards = new ArrayList<>();
 
@@ -75,6 +82,7 @@ public class GameActivity extends AppCompatActivity {
 
         betButton = findViewById(R.id.bet_button);
         pot = findViewById(R.id.pot);
+        potValue = findViewById(R.id.pot_value);
 
         resultText = findViewById(R.id.result_text);
         playAgainButton = findViewById(R.id.play_again_button);
@@ -94,12 +102,20 @@ public class GameActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra("name");
 
-        game = new Game(name);
+        game = new Game(name, oldPlayerWallet, oldAndroidWallet);
 
         playerName.setText(game.getPlayer().getName());
         computerName.setText(game.getComputer().getName());
 
         game.startGame();
+        game.placeBets(2);
+
+        potValueAmount = "£" + Integer.toString(game.getPot());
+        potValue.setText(potValueAmount);
+
+        playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
+        playerWallet.setText(playerWalletAmount);
+
         getInfo(game.getPlayer());
         displayHand(game.getPlayer());
     }
@@ -136,6 +152,7 @@ public class GameActivity extends AppCompatActivity {
         hitButton.setVisibility(View.GONE);
         compareButton.setVisibility(View.GONE);
         pot.setVisibility(View.GONE);
+        potValue.setVisibility(View.GONE);
 
         resultText.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
@@ -151,7 +168,11 @@ public class GameActivity extends AppCompatActivity {
     public void playAgain(View button) {
         Intent intent = new Intent(this, GameActivity.class);
         String name = playerName.getText().toString();
+
         intent.putExtra("name", name);
+        intent.putExtra("player_wallet", game.getPlayer().getWallet().getAmount());
+        intent.putExtra("dealer_wallet", game.getComputer().getWallet().getAmount());
+
         startActivity(intent);
     }
 
@@ -167,6 +188,14 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void betButton(View button) {
+        game.placeBets(5);
+        potValueAmount = "£" + Integer.toString(game.getPot());
+        potValue.setText(potValueAmount);
+        playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
+        playerWallet.setText(playerWalletAmount);
     }
 
 }

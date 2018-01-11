@@ -10,16 +10,17 @@ public class Game implements Serializable {
     private Player player;
     private Player computer;
     private Deck deck;
-    private int pot;
-    Player winner;
+    private Wallet pot;
+    private Player winner;
 
-    public Game(String playerName) {
+    public Game(String playerName, int playerAmount, int androidAmount) {
         this.deck = new Deck();
-        this.player = new Player(playerName);
-        this.computer = new Player("Android");
-        this.pot = 0;
+        this.player = new Player(playerName, playerAmount);
+        this.computer = new Player("Android", androidAmount);
+        this.pot = new Wallet(0);
         this.winner = null;
     }
+
 
     public Player getPlayer() {
         return player;
@@ -30,20 +31,21 @@ public class Game implements Serializable {
     }
 
     public int getPot() {
-        return pot;
+        return pot.getAmount();
     }
 
     public void emptyPot() {
-        this.pot = 0;
+        this.pot.empty();
     }
 
-    public void placeBet(int amount) {
-        player.decreaseWallet(amount);
-        computer.decreaseWallet(amount);
+    public void placeBets(int amount) {
+        player.getWallet().decreaseAmount(amount);
+        computer.getWallet().decreaseAmount(amount);
+        this.pot.increaseAmount(amount * 2);
     }
 
     public void payOut() {
-        this.winner.increaseWallet(this.pot);
+        this.winner.getWallet().increaseAmount(this.pot.getAmount());
         this.emptyPot();
     }
 
@@ -67,10 +69,10 @@ public class Game implements Serializable {
 
     public void determineWinner() {
         if(player.handValue() > computer.handValue()) {
-            this.winner = player;
+            this.winner = this.player;
         }
         if (player.handValue() < computer.handValue()) {
-            this.winner = computer;
+            this.winner = this.computer;
         }
     }
 
