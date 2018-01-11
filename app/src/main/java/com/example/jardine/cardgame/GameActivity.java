@@ -15,6 +15,7 @@ public class GameActivity extends AppCompatActivity {
 
     TextView playerName;
     TextView playerScore;
+    TextView playerWallet;
     TextView computerName;
     TextView computerScore;
     TextView resultText;
@@ -33,6 +34,9 @@ public class GameActivity extends AppCompatActivity {
     ImageView computerCard5;
     ArrayList<ImageView> computerCards;
 
+    ImageView pot;
+
+    ImageButton betButton;
     ImageButton hitButton;
     Button compareButton;
     Button playAgainButton;
@@ -69,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
         computerCards.add(computerCard4);
         computerCards.add(computerCard5);
 
+        betButton = findViewById(R.id.bet_button);
+        pot = findViewById(R.id.pot);
+
         resultText = findViewById(R.id.result_text);
         playAgainButton = findViewById(R.id.play_again_button);
 
@@ -77,6 +84,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerName = findViewById(R.id.player_name);
         playerScore = findViewById(R.id.player_score);
+        playerWallet = findViewById(R.id.player_wallet);
 
         computerName = findViewById(R.id.computer_name);
         computerScore = findViewById(R.id.computer_score);
@@ -127,12 +135,16 @@ public class GameActivity extends AppCompatActivity {
 
         hitButton.setVisibility(View.GONE);
         compareButton.setVisibility(View.GONE);
+        pot.setVisibility(View.GONE);
 
         resultText.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
         computerScore.setVisibility(View.VISIBLE);
 
-        String resultMessage = game.determineWinner();
+        game.determineWinner();
+        game.payOut();
+
+        String resultMessage = game.printWinner();
         resultText.setText(resultMessage);
     }
 
