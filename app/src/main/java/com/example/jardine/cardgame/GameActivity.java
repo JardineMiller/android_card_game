@@ -22,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
 
     String playerWalletAmount;
     String potValueAmount;
+    String computerWalletAmount;
+    String resultMessage;
 
     TextView computerName;
     TextView computerScore;
@@ -58,8 +60,8 @@ public class GameActivity extends AppCompatActivity {
 
         int oldPlayerWallet = getIntent().getIntExtra("player_wallet", 50);
         int oldAndroidWallet = getIntent().getIntExtra("computer_wallet", 50);
-        numOfBets = 0;
 
+        numOfBets = 0;
         playerCards = new ArrayList<>();
         computerCards = new ArrayList<>();
 
@@ -85,23 +87,19 @@ public class GameActivity extends AppCompatActivity {
         computerCards.add(computerCard4);
         computerCards.add(computerCard5);
 
-        betButton = findViewById(R.id.bet_button);
-        pot = findViewById(R.id.pot);
-        potValue = findViewById(R.id.pot_value);
-
-        resultText = findViewById(R.id.result_text);
+        betButton       = findViewById(R.id.bet_button);
+        pot             = findViewById(R.id.pot);
+        potValue        = findViewById(R.id.pot_value);
+        resultText      = findViewById(R.id.result_text);
         playAgainButton = findViewById(R.id.play_again_button);
-
-        hitButton = findViewById(R.id.hit_button);
-        compareButton =  findViewById(R.id.compare_button);
-
-        playerName = findViewById(R.id.player_name);
-        playerScore = findViewById(R.id.player_score);
-        playerWallet = findViewById(R.id.player_wallet);
-
-        computerName = findViewById(R.id.computer_name);
-        computerScore = findViewById(R.id.computer_score);
-        computerWallet = findViewById(R.id.computer_wallet);
+        hitButton       = findViewById(R.id.hit_button);
+        compareButton   =  findViewById(R.id.compare_button);
+        playerName      = findViewById(R.id.player_name);
+        playerScore     = findViewById(R.id.player_score);
+        playerWallet    = findViewById(R.id.player_wallet);
+        computerName    = findViewById(R.id.computer_name);
+        computerScore   = findViewById(R.id.computer_score);
+        computerWallet  = findViewById(R.id.computer_wallet);
 
         resultText.setVisibility(View.GONE);
         playAgainButton.setVisibility(View.GONE);
@@ -116,15 +114,7 @@ public class GameActivity extends AppCompatActivity {
         game.startGame();
         game.placeBets(5);
 
-        potValueAmount = "£" + Integer.toString(game.getPot());
-        potValue.setText(potValueAmount);
-
-        playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
-        playerWallet.setText(playerWalletAmount);
-
-        String computerWalletAmount = "£" + Integer.toString(game.getComputer().getWallet().getAmount());
-        computerWallet.setText(computerWalletAmount);
-
+        updateWallets();
         getInfo(game.getPlayer());
         displayHand(game.getPlayer());
     }
@@ -155,11 +145,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void compare(View button) {
-        String resultMessage;
         game.determineWinner();
         game.payOut();
         getInfo(game.getComputer());
         displayHand(game.getComputer());
+        updateWallets();
 
         hitButton.setVisibility(View.GONE);
         compareButton.setVisibility(View.GONE);
@@ -169,15 +159,7 @@ public class GameActivity extends AppCompatActivity {
         resultText.setVisibility(View.VISIBLE);
         computerScore.setVisibility(View.VISIBLE);
 
-
-        if(game.getWinner() == game.getPlayer() && game.getComputer().getWallet().getAmount() == 0) {
-            resultMessage = game.printWinner() + " Android is out of chips";
-        } else if (game.getWinner() == game.getComputer() && game.getPlayer().getWallet().getAmount() == 0) {
-            resultMessage = game.printWinner() + " You are out of chips";
-        } else {
-            resultMessage = game.printWinner();
-            playAgainButton.setVisibility(View.VISIBLE);
-        }
+        checkEnd();
 
         resultText.setText(resultMessage);
     }
@@ -195,9 +177,11 @@ public class GameActivity extends AppCompatActivity {
 
     public void displayHand(Player player) {
         ArrayList<Card> hand = player.getHand();
+
         for(int i = 0; i < hand.size(); i++) {
             String imagePath = hand.get(i).getImage();
             int resource = getResources().getIdentifier(imagePath, "drawable", this.getPackageName());
+
             if(player.getName().equals("Android")) {
                 computerCards.get(i).setImageResource(resource);
             } else {
@@ -210,15 +194,30 @@ public class GameActivity extends AppCompatActivity {
     public void betButton(View button) {
         if( numOfBets < (game.getPlayer().handCount() - 1)) {
             game.placeBets(5);
-            potValueAmount = "£" + Integer.toString(game.getPot());
-            potValue.setText(potValueAmount);
-            playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
-            playerWallet.setText(playerWalletAmount);
-            String computerWalletAmount = "£" + Integer.toString(game.getComputer().getWallet().getAmount());
-            computerWallet.setText(computerWalletAmount);
+            updateWallets();
             numOfBets++;
         }
 
+    }
+
+    public void updateWallets() {
+        potValueAmount = "£" + Integer.toString(game.getPot());
+        potValue.setText(potValueAmount);
+        playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
+        playerWallet.setText(playerWalletAmount);
+        computerWalletAmount = "£" + Integer.toString(game.getComputer().getWallet().getAmount());
+        computerWallet.setText(computerWalletAmount);
+    }
+
+    public void checkEnd() {
+        if(game.getWinner() == game.getPlayer() && game.getComputer().getWallet().getAmount() == 0) {
+            resultMessage = game.printWinner() + " Android is out of chips";
+        } else if (game.getWinner() == game.getComputer() && game.getPlayer().getWallet().getAmount() == 0) {
+            resultMessage = game.printWinner() + " You are out of chips";
+        } else {
+            resultMessage = game.printWinner();
+            playAgainButton.setVisibility(View.VISIBLE);
+        }
     }
 
 }

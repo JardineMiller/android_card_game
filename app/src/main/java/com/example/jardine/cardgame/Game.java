@@ -51,8 +51,13 @@ public class Game implements Serializable {
     }
 
     public void payOut() {
-        this.winner.receive(this.pot.getAmount());
-        this.emptyPot();
+        if(this.winner == null) {
+            this.player.receive(this.pot.getAmount() / 2);
+            this.computer.receive(this.pot.getAmount() / 2);
+        } else {
+            this.winner.receive(this.pot.getAmount());
+            this.emptyPot();
+        }
     }
 
     public void prepareDeck() {
@@ -93,4 +98,7 @@ public class Game implements Serializable {
         }
         return message;
     }
+
+
+
 }
