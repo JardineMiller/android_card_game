@@ -13,9 +13,13 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
 
+    int numOfBets;
+
     TextView playerName;
     TextView playerScore;
     TextView playerWallet;
+    TextView computerWallet;
+
     String playerWalletAmount;
     String potValueAmount;
 
@@ -53,7 +57,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         int oldPlayerWallet = getIntent().getIntExtra("player_wallet", 50);
-        int oldAndroidWallet = getIntent().getIntExtra("android_wallet", 50);
+        int oldAndroidWallet = getIntent().getIntExtra("computer_wallet", 50);
+        numOfBets = 0;
 
         playerCards = new ArrayList<>();
         computerCards = new ArrayList<>();
@@ -96,6 +101,7 @@ public class GameActivity extends AppCompatActivity {
 
         computerName = findViewById(R.id.computer_name);
         computerScore = findViewById(R.id.computer_score);
+        computerWallet = findViewById(R.id.computer_wallet);
 
         resultText.setVisibility(View.GONE);
         playAgainButton.setVisibility(View.GONE);
@@ -108,13 +114,16 @@ public class GameActivity extends AppCompatActivity {
         computerName.setText(game.getComputer().getName());
 
         game.startGame();
-        game.placeBets(2);
+        game.placeBets(5);
 
         potValueAmount = "£" + Integer.toString(game.getPot());
         potValue.setText(potValueAmount);
 
         playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
         playerWallet.setText(playerWalletAmount);
+
+        String computerWalletAmount = "£" + Integer.toString(game.getComputer().getWallet().getAmount());
+        computerWallet.setText(computerWalletAmount);
 
         getInfo(game.getPlayer());
         displayHand(game.getPlayer());
@@ -146,6 +155,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void compare(View button) {
+        String resultMessage;
+        game.determineWinner();
+        game.payOut();
         getInfo(game.getComputer());
         displayHand(game.getComputer());
 
@@ -155,13 +167,18 @@ public class GameActivity extends AppCompatActivity {
         potValue.setVisibility(View.GONE);
 
         resultText.setVisibility(View.VISIBLE);
-        playAgainButton.setVisibility(View.VISIBLE);
         computerScore.setVisibility(View.VISIBLE);
 
-        game.determineWinner();
-        game.payOut();
 
-        String resultMessage = game.printWinner();
+        if(game.getWinner() == game.getPlayer() && game.getComputer().getWallet().getAmount() == 0) {
+            resultMessage = game.printWinner() + " Android is out of chips";
+        } else if (game.getWinner() == game.getComputer() && game.getPlayer().getWallet().getAmount() == 0) {
+            resultMessage = game.printWinner() + " You are out of chips";
+        } else {
+            resultMessage = game.printWinner();
+            playAgainButton.setVisibility(View.VISIBLE);
+        }
+
         resultText.setText(resultMessage);
     }
 
@@ -171,7 +188,7 @@ public class GameActivity extends AppCompatActivity {
 
         intent.putExtra("name", name);
         intent.putExtra("player_wallet", game.getPlayer().getWallet().getAmount());
-        intent.putExtra("dealer_wallet", game.getComputer().getWallet().getAmount());
+        intent.putExtra("computer_wallet", game.getComputer().getWallet().getAmount());
 
         startActivity(intent);
     }
@@ -191,11 +208,17 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void betButton(View button) {
-        game.placeBets(5);
-        potValueAmount = "£" + Integer.toString(game.getPot());
-        potValue.setText(potValueAmount);
-        playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
-        playerWallet.setText(playerWalletAmount);
+        if( numOfBets < (game.getPlayer().handCount() - 1)) {
+            game.placeBets(5);
+            potValueAmount = "£" + Integer.toString(game.getPot());
+            potValue.setText(potValueAmount);
+            playerWalletAmount = "£" + Integer.toString(game.getPlayer().getWallet().getAmount());
+            playerWallet.setText(playerWalletAmount);
+            String computerWalletAmount = "£" + Integer.toString(game.getComputer().getWallet().getAmount());
+            computerWallet.setText(computerWalletAmount);
+            numOfBets++;
+        }
+
     }
 
 }

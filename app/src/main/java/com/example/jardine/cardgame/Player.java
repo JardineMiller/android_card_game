@@ -31,19 +31,13 @@ public class Player {
 
     public void bet(int amount) {
         this.wallet.decreaseAmount(amount);
+
     }
 
     public ArrayList<Card> getHand() {
         return hand;
     }
 
-    public String getAllCards() {
-        String cards = "";
-        for(Card card : hand) {
-            cards += card.prettyName() + "\n";
-        }
-        return cards;
-    }
 
     public int handCount() {
         return this.hand.size();

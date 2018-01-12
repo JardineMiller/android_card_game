@@ -30,6 +30,10 @@ public class Game implements Serializable {
         return computer;
     }
 
+    public Player getWinner() {
+        return winner;
+    }
+
     public int getPot() {
         return pot.getAmount();
     }
@@ -39,13 +43,15 @@ public class Game implements Serializable {
     }
 
     public void placeBets(int amount) {
-        player.getWallet().decreaseAmount(amount);
-        computer.getWallet().decreaseAmount(amount);
-        this.pot.increaseAmount(amount * 2);
+        if(player.getWallet().getAmount() >= amount && computer.getWallet().getAmount() >= amount) {
+            player.bet(amount);
+            computer.bet(amount);
+            this.pot.increaseAmount(amount * 2);
+        }
     }
 
     public void payOut() {
-        this.winner.getWallet().increaseAmount(this.pot.getAmount());
+        this.winner.receive(this.pot.getAmount());
         this.emptyPot();
     }
 
