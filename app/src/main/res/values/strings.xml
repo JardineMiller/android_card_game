@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Winning Deck</string>
-    <string name="welcome_message">Welcome to Winning Deck! Type in your name below and press the \'Play\' button to begin!</string>
+    <string name="app_name">Winning Hand</string>
+    <string name="welcome_message">Welcome to Winning Hand! Type in your name below and press the \'Play\' button to begin!</string>
     <string name="play_button">Play</string>
     <string name="play_again_button">Play again</string>
     <string name='name_string'>Name</string>

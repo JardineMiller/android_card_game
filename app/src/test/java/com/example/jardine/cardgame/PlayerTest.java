@@ -16,7 +16,7 @@ public class PlayerTest {
 
     @Before
     public void before() {
-        player = new Player("Jardine");
+        player = new Player("Jardine", 50);
         card = new Card(CardSuit.values()[0], CardValue.values()[0]);
         card2 = new Card(CardSuit.values()[1], CardValue.values()[1]);
     }
